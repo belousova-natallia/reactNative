@@ -1,6 +1,9 @@
 import {StyleSheet} from 'react-native';
 
 export const productDetailsStyles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
   headerIcon: {
     marginRight: 25,
   },

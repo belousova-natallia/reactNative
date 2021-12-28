@@ -1,7 +1,7 @@
 import React from 'react';
 import {Image, Text, View} from 'react-native';
 
-import {styles} from '../../styles/mainStyles';
+import {styles} from './styles/mainStyles';
 
 export interface ProductItem {
   id: string;

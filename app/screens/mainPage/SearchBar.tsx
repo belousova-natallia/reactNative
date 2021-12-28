@@ -2,7 +2,7 @@
 import React from 'react';
 import {TextInput, View} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {searchBoxStyles} from '../../styles/mainStyles';
+import {searchBoxStyles} from './styles/mainStyles';
 
 export interface SearchBarInterface {
   clicked: any;

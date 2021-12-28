@@ -1,7 +1,7 @@
 import {Image, ScrollView, Text, RefreshControl, View} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {getProductById} from '../../services/productService';
-import {productDetailsStyles} from '../../styles/productDetailsStyles';
+import {productDetailsStyles} from './styles/productDetailsStyles';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const mockId = '1';
@@ -58,7 +58,7 @@ export const ProductDetailComponent = () => {
           </View>
           <View style={productDetailsStyles.detailsBlock}>
             <Text style={productDetailsStyles.sectionTitle}>Description</Text>
-            <Text style={{}}>{item.attributes.description}</Text>
+            <Text>{item.attributes.description}</Text>
           </View>
         </View>
       ) : null}

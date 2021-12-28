@@ -1,16 +1,16 @@
 import React, {useState} from 'react';
-import {Text, View} from 'react-native';
+import {SafeAreaView, Text, View} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {styles} from '../../styles/mainStyles';
+import {styles} from './styles/mainStyles';
 
 import SearchBar from './SearchBar';
 import {ItemsContainer} from './ItemsContainer';
 
-const Main = () => {
+const MainScreen = () => {
   const [searchPhrase, setSearchPhrase] = useState('');
   const [clicked, setClicked] = useState(false);
   return (
-    <>
+    <SafeAreaView style={styles.container}>
       <View style={styles.menubar}>
         <View
           style={{
@@ -35,8 +35,8 @@ const Main = () => {
         setClicked={setClicked}
       />
       <ItemsContainer />
-    </>
+    </SafeAreaView>
   );
 };
 
-export default Main;
+export default MainScreen;

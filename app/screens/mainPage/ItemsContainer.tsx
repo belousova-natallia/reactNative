@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import Item from './Item';
 import {getProducts} from '../../services/productService';
-import {styles} from '../../styles/mainStyles';
+import {styles} from './styles/mainStyles';
 
 export const ItemsContainer = () => {
   const [isLoading, setLoading] = useState(true);
