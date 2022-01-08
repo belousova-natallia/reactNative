@@ -1,19 +1,34 @@
-import {Image, ScrollView, Text, RefreshControl, View} from 'react-native';
+import {
+  Image,
+  ScrollView,
+  Text,
+  RefreshControl,
+  View,
+  Pressable,
+} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {getProductById} from '../../services/productService';
 import {productDetailsStyles} from './styles/productDetailsStyles';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import {ProductContext} from '../../../index';
 
-const mockId = '1';
-
-export const ProductDetailComponent = () => {
+export const ProductDetailComponent = ({
+  id,
+  navigation,
+}: {
+  id: string;
+  navigation: any;
+}) => {
   const [isLoading, setLoading] = useState(true);
   const [item, setItem] = useState<any>(null);
   const [refreshing, setRefreshing] = React.useState(false);
+  const [isColorSet, setColor] = useState<any>(false);
 
   useEffect(() => {
-    loadProductData(mockId);
+    loadProductData(id);
   }, []);
+
+  const {addToCart} = React.useContext(ProductContext);
 
   const loadProductData = (id: string) => {
     setLoading(true);
@@ -26,7 +41,7 @@ export const ProductDetailComponent = () => {
 
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
-    loadProductData(mockId).then(() => setRefreshing(false));
+    loadProductData(id).then(() => setRefreshing(false));
   }, []);
 
   return (
@@ -54,12 +69,40 @@ export const ProductDetailComponent = () => {
           </View>
           <View style={productDetailsStyles.detailsBlock}>
             <Text style={productDetailsStyles.sectionTitle}>Select color</Text>
-            <Text style={productDetailsStyles.selectColorOptions}>Blue</Text>
+            <Pressable
+              onPress={() => {
+                !isColorSet ? setColor(true) : setColor(false);
+              }}>
+              <Text
+                style={
+                  !isColorSet
+                    ? productDetailsStyles.selectColorOptions
+                    : [
+                        productDetailsStyles.selectColorOptions,
+                        {borderColor: '#999', borderWidth: 1},
+                      ]
+                }>
+                Blue
+              </Text>
+            </Pressable>
           </View>
           <View style={productDetailsStyles.detailsBlock}>
             <Text style={productDetailsStyles.sectionTitle}>Description</Text>
             <Text>{item.attributes.description}</Text>
           </View>
+
+          <Pressable
+            style={productDetailsStyles.button}
+            onPress={() => {
+              if (!isColorSet) {
+                navigation.navigate('SelectColorModal');
+              } else {
+                navigation.navigate('ProductAddedModal');
+                addToCart(item);
+              }
+            }}>
+            <Text style={productDetailsStyles.textStyle}>Add to Cart</Text>
+          </Pressable>
         </View>
       ) : null}
     </ScrollView>

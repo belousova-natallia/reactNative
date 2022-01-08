@@ -4,8 +4,12 @@ export const productDetailsStyles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  headerIcon: {
+  headerIcons: {
+    flexDirection: 'row',
+  },
+  heartIcon: {
     marginRight: 25,
+    //marginTop: 10,
   },
 
   productDetails: {
@@ -38,9 +42,8 @@ export const productDetailsStyles = StyleSheet.create({
   },
 
   detailsBlock: {
-    borderBottomColor: '#eeeeee',
     borderTopColor: '#eeeeee',
-    borderWidth: 1,
+    borderTopWidth: 1,
     borderLeftWidth: 0,
     borderRightWidth: 0,
     paddingVertical: 15,
@@ -61,5 +64,25 @@ export const productDetailsStyles = StyleSheet.create({
   productTitlePrice: {
     marginVertical: 20,
     alignItems: 'flex-start',
+  },
+
+  button: {
+    borderRadius: 5,
+    padding: 10,
+    elevation: 2,
+    backgroundColor: '#2196F3',
+    margin: 20,
+    alignSelf: 'center',
+    justifyContent: 'center',
+    alignContent: 'center',
+    width: '100%',
+    maxWidth: 500,
+    height: 40,
+  },
+  textStyle: {
+    fontSize: 15,
+    color: 'white',
+    fontWeight: 'bold',
+    textAlign: 'center',
   },
 });

@@ -8,16 +8,17 @@ export const styles = StyleSheet.create({
     height: 55,
     width: '100%',
     backgroundColor: '#008ACE',
-    flexDirection: 'row',
+    flexDirection: 'column',
     alignItems: 'center',
-    paddingRight: 20,
-    paddingLeft: 20,
+    paddingRight: 90,
+    paddingLeft: 10,
+    justifyContent: 'center',
   },
+  cart: {},
   title: {
     color: '#ffffff',
     fontSize: 24,
-    flex: 1,
-    textAlignVertical: 'center',
+    width: 200,
   },
 
   productsContainer: {
