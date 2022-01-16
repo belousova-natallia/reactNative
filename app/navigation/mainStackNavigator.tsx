@@ -14,24 +14,29 @@ import {LoginToContinueModal} from '../modals/loginToContinueModal';
 import {ProductAddedModal} from '../modals/productAddedModal';
 import React from 'react';
 import nonAuthorizedCartScreen from '../screens/cart/nonAuthorizedCartScreen';
+import {AuthContext} from '../../index';
+import CustomDrawer from './customDrawer';
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 
-export function MainStackNavigator({userToken}: {userToken: string | null}) {
+export function MainStackNavigator() {
+  const {userToken} = React.useContext(AuthContext);
+
   return (
-    <Stack.Navigator>
+    <Stack.Navigator screenOptions={{headerShown: true}}>
       <Stack.Group>
         <Stack.Screen
-          name="Root"
-          component={DrawerNavigator}
-          options={{headerShown: false}}
+          name="Home"
+          component={MainScreen}
+          options={navigationOptionsHeader}
         />
         <Stack.Screen
           name="ProductDetails"
           component={ProductDetailsScreen}
           options={({navigation}) => {
             return {
+              headerShown: true,
               title: '',
               headerTintColor: '#fff',
               headerStyle: {backgroundColor: '#008ACE'},
@@ -55,6 +60,7 @@ export function MainStackNavigator({userToken}: {userToken: string | null}) {
           <Stack.Screen name="My Cart" component={AuthorizedCartScreen} />
         )}
       </Stack.Group>
+
       <Stack.Group screenOptions={{presentation: 'modal'}}>
         <Stack.Screen name="SelectColorModal" component={SelectColorModal} />
         <Stack.Screen
@@ -70,6 +76,7 @@ export function MainStackNavigator({userToken}: {userToken: string | null}) {
 const navigationOptionsHeader = ({navigation}: {navigation: any}) => {
   return {
     headerStyle: {backgroundColor: '#008ACE'},
+
     headerRightStyle: {},
     headerRight: () => (
       <CartIcon navigation={navigation} style={{paddingHorizontal: 15}} />
@@ -83,7 +90,35 @@ const navigationOptionsHeader = ({navigation}: {navigation: any}) => {
       <View>
         <Icon
           name="bars"
-          size={18}
+          size={20}
+          color="#fff"
+          onPress={() => navigation.toggleDrawer()}
+          style={{paddingVertical: 20, paddingRight: 20}}
+        />
+      </View>
+    ),
+  };
+};
+
+const navigationOptionsHeaderDrawer = ({navigation}: {navigation: any}) => {
+  return {
+    title: 'Ecommerce Store',
+    headerStyle: {backgroundColor: '#008ACE'},
+    style: {fontSize: 30},
+    headerRightStyle: {},
+    headerRight: () => (
+      <CartIcon navigation={navigation} style={{paddingHorizontal: 15}} />
+    ),
+    headerTitle: () => (
+      <View style={styles.menubar}>
+        <Text style={styles.title}>Ecommerce store</Text>
+      </View>
+    ),
+    headerLeft: () => (
+      <View>
+        <Icon
+          name="bars"
+          size={20}
           color="#fff"
           onPress={() => navigation.toggleDrawer()}
           style={{padding: 20}}
@@ -93,15 +128,41 @@ const navigationOptionsHeader = ({navigation}: {navigation: any}) => {
   };
 };
 
-function DrawerNavigator() {
+export const DrawerNavigator = () => {
+  const {userToken} = React.useContext(AuthContext);
   return (
-    <Drawer.Navigator>
+    <Drawer.Navigator
+      drawerContent={props => <CustomDrawer {...props} />}
+      screenOptions={{
+        headerShown: false,
+        drawerStyle: {
+          width: 340,
+        },
+      }}>
       <Drawer.Screen
-        name="Home"
-        component={MainScreen}
-        options={navigationOptionsHeader}
+        name="Root"
+        component={MainStackNavigator}
+        options={navigationOptionsHeaderDrawer}
       />
+      {userToken == null ? (
+        <Drawer.Screen
+          name="My Cart"
+          component={nonAuthorizedCartScreen}
+          options={{
+            headerShown: true,
+          }}
+        />
+      ) : (
+        <Drawer.Screen
+          name="My Cart"
+          component={AuthorizedCartScreen}
+          options={{
+            headerShown: true,
+          }}
+        />
+      )}
+
       <Drawer.Screen name="TestScreen" component={TestScreen} />
     </Drawer.Navigator>
   );
-}
+};

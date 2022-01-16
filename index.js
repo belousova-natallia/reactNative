@@ -6,7 +6,7 @@ import {name as appName} from './app.json';
 import {AppRegistry} from 'react-native';
 import React, {useReducer, useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import {MainStackNavigator} from './app/navigation/mainStackNavigator';
+import {DrawerNavigator} from './app/navigation/mainStackNavigator';
 import {getToken} from './app/services/authService';
 
 AppRegistry.registerComponent(appName, () => App);
@@ -92,25 +92,22 @@ const App = () => {
     bootstrapAsync();
   }, []);
 
-  const authContext = React.useMemo(
-    () => ({
-      signIn: async data => {
-        getToken(data.username, data.password).then(res => {
-          setToken(res.access_token);
-        });
-        dispatch({type: 'SIGN_IN', token: userToken});
-      },
-      signOut: () => dispatch({type: 'SIGN_OUT'}),
-      signUp: async data => {
-        getToken(data.username, data.password).then(res => {
-          setToken(res.access_token);
-        });
-
+  const authContext = {
+    signIn: async data => {
+      getToken(data.username, data.password).then(res => {
+        setToken(res.access_token);
+        dispatch({type: 'SIGN_IN', token: res.access_token});
+      });
+    },
+    signOut: () => dispatch({type: 'SIGN_OUT'}),
+    signUp: async data => {
+      getToken(data.username, data.password).then(res => {
+        setToken(res.access_token);
         dispatch({type: 'SIGN_IN', token: 'dummy-auth-token'});
-      },
-    }),
-    [],
-  );
+      });
+    },
+    userToken: state.userToken,
+  };
 
   const productContext = {
     addToCart: product => {
@@ -130,7 +127,7 @@ const App = () => {
     <NavigationContainer>
       <AuthContext.Provider value={authContext}>
         <ProductContext.Provider value={productContext}>
-          <MainStackNavigator userToken={userToken} />
+          <DrawerNavigator />
         </ProductContext.Provider>
       </AuthContext.Provider>
     </NavigationContainer>

@@ -7,7 +7,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
   },
   modalView: {
-    width: 335,
+    maxWidth: 335,
     margin: 10,
     backgroundColor: 'white',
     borderRadius: 20,

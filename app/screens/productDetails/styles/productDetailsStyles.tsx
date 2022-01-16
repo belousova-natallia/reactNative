@@ -3,6 +3,7 @@ import {StyleSheet} from 'react-native';
 export const productDetailsStyles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#fff',
   },
   headerIcons: {
     flexDirection: 'row',

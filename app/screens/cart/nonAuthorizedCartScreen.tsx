@@ -4,7 +4,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import {styles} from './styles';
 import {AuthContext} from '../../../index';
 
-const nonAuthorizedCartScreen = () => {
+const NonAuthorizedCartScreen = () => {
   const {signIn} = React.useContext(AuthContext);
   const username = 'admin';
   const password = '1234';
@@ -30,4 +30,4 @@ const nonAuthorizedCartScreen = () => {
   );
 };
 
-export default nonAuthorizedCartScreen;
+export default NonAuthorizedCartScreen;

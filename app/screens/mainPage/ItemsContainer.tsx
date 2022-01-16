@@ -11,7 +11,7 @@ import Item from './Item';
 import {getProducts} from '../../services/productService';
 import {styles} from './styles/mainStyles';
 
-export const ItemsContainer = ({navigation}: {navigation: any}) => {
+export const ItemsContainer = () => {
   const [isLoading, setLoading] = useState(true);
   const [items, setItems] = useState<any[]>([]);
   const [links, setLinks] = useState<any>({});
@@ -78,7 +78,6 @@ export const ItemsContainer = ({navigation}: {navigation: any}) => {
             name={item.attributes.name}
             display_price={item.attributes.display_price}
             id={item.id}
-            navigation={navigation}
           />
         )}
         onEndReached={loadMoreProducts}

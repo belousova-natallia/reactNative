@@ -13,9 +13,7 @@ const ProductDetailScreen = ({
   const {id} = route.params;
   return (
     <SafeAreaView style={productDetailsStyles.container}>
-      <View style={{backgroundColor: '#fff', flex: 1}}>
-        <ProductDetailComponent id={id} navigation={navigation} />
-      </View>
+      <ProductDetailComponent id={id} navigation={navigation} />
     </SafeAreaView>
   );
 };

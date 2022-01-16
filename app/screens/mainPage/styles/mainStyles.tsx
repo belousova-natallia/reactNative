@@ -6,19 +6,16 @@ export const styles = StyleSheet.create({
   },
   menubar: {
     height: 55,
-    width: '100%',
     backgroundColor: '#008ACE',
     flexDirection: 'column',
     alignItems: 'center',
-    paddingRight: 90,
-    paddingLeft: 10,
     justifyContent: 'center',
   },
   cart: {},
   title: {
     color: '#ffffff',
     fontSize: 24,
-    width: 200,
+    paddingLeft: 20,
   },
 
   productsContainer: {

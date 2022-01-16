@@ -11,7 +11,7 @@ export const CartIcon = ({
 }) => {
   return (
     <Icon
-      name="shopping-basket"
+      name="shopping-cart"
       size={20}
       color="#fff"
       style={[styles.cart, style]}

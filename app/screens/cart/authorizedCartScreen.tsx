@@ -14,10 +14,8 @@ import {ProductContext} from '../../../index';
 import {productDetailsStyles} from '../productDetails/styles/productDetailsStyles';
 
 const AuthorizedCartScreen = ({navigation}: {navigation: any}) => {
-  const {productsInCart} = React.useContext(ProductContext);
-  const {removeOneFromCart} = React.useContext(ProductContext);
-  const {addToCart} = React.useContext(ProductContext);
-  const {deleteFromCart} = React.useContext(ProductContext);
+  const {productsInCart, removeOneFromCart, addToCart, deleteFromCart} =
+    React.useContext(ProductContext);
 
   const renderItem = ({item}: {item: any}) => (
     <View style={styles.productItem}>
@@ -119,21 +117,19 @@ const AuthorizedCartScreen = ({navigation}: {navigation: any}) => {
         </SafeAreaView>
       ) : (
         <SafeAreaView style={{flex: 1}}>
-          <View>
-            <FlatList
-              keyExtractor={item => item.id}
-              data={[
-                ...productsInCart
-                  .reduce((acc: Map<any, any>, el: any) => {
-                    acc.set(el.id, el);
-                    return acc;
-                  }, new Map())
-                  .values(),
-              ]}
-              renderItem={renderItem}
-              ListFooterComponent={renderFooter}
-            />
-          </View>
+          <FlatList
+            keyExtractor={item => item.id}
+            data={[
+              ...productsInCart
+                .reduce((acc: Map<any, any>, el: any) => {
+                  acc.set(el.id, el);
+                  return acc;
+                }, new Map())
+                .values(),
+            ]}
+            renderItem={renderItem}
+            ListFooterComponent={renderFooter}
+          />
         </SafeAreaView>
       )}
     </>

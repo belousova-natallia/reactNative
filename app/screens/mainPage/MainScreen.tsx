@@ -5,7 +5,7 @@ import {styles} from './styles/mainStyles';
 import SearchBar from './SearchBar';
 import {ItemsContainer} from './ItemsContainer';
 
-const MainScreen = ({navigation}: {navigation: any}) => {
+const MainScreen = () => {
   const [searchPhrase, setSearchPhrase] = useState('');
   const [clicked, setClicked] = useState(false);
   return (
@@ -16,7 +16,7 @@ const MainScreen = ({navigation}: {navigation: any}) => {
         clicked={clicked}
         setClicked={setClicked}
       />
-      <ItemsContainer navigation={navigation} />
+      <ItemsContainer />
     </SafeAreaView>
   );
 };
